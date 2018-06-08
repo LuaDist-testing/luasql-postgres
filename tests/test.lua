@@ -497,8 +497,16 @@ end
 -- Escaping strings
 ---------------------------------------------------------------------
 function escape ()
-        local escaped = CONN:escape"a'b'c'd"
+	local escaped = CONN:escape"a'b'c'd"
 	assert ("a\\'b\\'c\\'d" == escaped or "a''b''c''d" == escaped)
+
+	local n = 5200
+	local s1 = string.rep("'", n)
+	local s2 = CONN:escape(s1)
+	assert (s1:len() == n)
+	assert (s2:len() == 2*n)
+	assert (s2 == s1..s1)
+
 	io.write (" escape")
 end
 
@@ -653,7 +661,12 @@ tests = {
 }
 
 if string.find(_VERSION, " 5.0") then
-	luasql = assert(loadlib("./"..driver..".so", "luaopen_luasql_"..driver))()
+	local init_so, err = loadlib("./"..driver..".so", "luaopen_luasql_"..driver)
+	if init_so then
+		luasql = init_so()
+	else
+		luasql = assert(loadlib("/usr/local/lib/lua/5.0/luasql/"..driver..".so", "luaopen_luasql_"..driver))()
+	end
 else
 	luasql = require ("luasql."..driver)
 end
