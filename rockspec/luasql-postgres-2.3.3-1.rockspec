@@ -1,17 +1,9 @@
--- This file was automatically generated for the LuaDist project.
-
-package = "luasql-postgres"
-version = "2.3.2-1"
--- LuaDist source
+package = "LuaSQL-Postgres"
+version = "2.3.3-1"
 source = {
-  tag = "2.3.2-1",
-  url = "git://github.com/LuaDist-testing/luasql-postgres.git"
+  url = "git://github.com/keplerproject/luasql.git",
+  branch = "v2.3.3",
 }
--- Original source
--- source = {
---   url = "git://github.com/keplerproject/luasql.git",
---   branch = "v2.3.2",
--- }
 description = {
    summary = "Database connectivity for Lua (Postgres driver)",
    detailed = [[
