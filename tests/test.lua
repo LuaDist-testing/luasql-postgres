@@ -503,9 +503,10 @@ function escape ()
 	local n = 5200
 	local s1 = string.rep("'", n)
 	local s2 = CONN:escape(s1)
+	local s3 = s1:gsub ("'", "\\'")
 	assert (s1:len() == n)
 	assert (s2:len() == 2*n)
-	assert (s2 == s1..s1)
+	assert (s2 == s1..s1 or s2 == s3)
 
 	io.write (" escape")
 end
@@ -671,7 +672,11 @@ else
 	luasql = require ("luasql."..driver)
 end
 assert (luasql, "Could not load driver: no luasql table.")
-io.write (luasql._VERSION.." "..driver.." driver test.  "..luasql._COPYRIGHT.."\n")
+io.write (luasql._VERSION.." "..driver)
+if luasql._CLIENTVERSION then
+	io.write (" ("..luasql._CLIENTVERSION..")")
+end
+io.write (" driver test.  "..luasql._COPYRIGHT.."\n")
 
 for i = 1, table.getn (tests) do
 	local t = tests[i]
