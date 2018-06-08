@@ -1,10 +1,10 @@
 -- This file was automatically generated for the LuaDist project.
 
 package = "luasql-postgres"
-version = "2.3.5-1"
+version = "2.3.5-2"
 -- LuaDist source
 source = {
-  tag = "2.3.5-1",
+  tag = "2.3.5-2",
   url = "git://github.com/LuaDist-testing/luasql-postgres.git"
 }
 -- Original source
@@ -20,14 +20,14 @@ description = {
       and retrieve results in a row-by-row cursor fashion.
    ]],
    license = "MIT/X11",
-   homepage = "http://www.keplerproject.org/luasql/"
+   homepage = "http://keplerproject.github.io/luasql/"
 }
 dependencies = {
    "lua >= 5.0"
 }
 external_dependencies = {
    PGSQL = {
-      header = "pg_config.h"
+      header = "libpq-fe.h"
    }
 }
 build = {
